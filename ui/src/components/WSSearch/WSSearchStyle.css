@@ -26,6 +26,7 @@
 
 .word-scrapper-search-icon {
   width: 10%;
+  min-width: 45px;
   height: 30px;
   display: flex;
   align-items: center;

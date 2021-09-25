@@ -1,5 +1,6 @@
 // Modules
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 // Context(s)
 import appContext from "./contexts/appContext.js";
@@ -18,6 +19,9 @@ function App() {
       style={{ backgroundImage: "url('/background.svg')" }}
       className="word-scrapper-wrapper"
     >
+      <Helmet>
+        <title>Word Scrapper</title>
+      </Helmet>
       <Router>
         <Switch>
           <Route exact path="/">
