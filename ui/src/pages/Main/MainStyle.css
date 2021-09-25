@@ -1,0 +1,22 @@
+.word-scrapper-mainPage-container {
+  height: fit-content;
+  height: -moz-fit-content;
+  max-width: 1200px;
+  margin-top: 20vh;
+  padding: 15px;
+  position: relative;
+  z-index: 100;
+}
+
+.word-scrapper-mainPage-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.word-scrapper-mainPage-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

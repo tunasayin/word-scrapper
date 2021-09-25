@@ -1,11 +1,9 @@
 {
-  "name": "server",
+  "name": "word-scrapper",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "Server side for word scrapper.",
+  "main": "main.js",
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC",

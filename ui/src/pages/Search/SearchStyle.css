@@ -1,0 +1,37 @@
+.word-scrapper-searchPage-container {
+  width: 100%;
+  position: relative;
+  z-index: 100;
+}
+
+.word-scrapper-searchPage-container .word-scrapper-input-container {
+  animation: inputAnim 600ms forwards;
+}
+
+.word-scrapper-searchPage-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 45px;
+  animation: headPartAnim 500ms forwards;
+}
+
+@keyframes headPartAnim {
+  0% {
+    transform: translateY(150px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes inputAnim {
+  0% {
+    width: 30%;
+  }
+
+  100% {
+    width: 60%;
+  }
+}
