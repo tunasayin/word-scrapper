@@ -1,3 +1,19 @@
+@keyframes resultsInitAnim {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+
+  50% {
+    transform: translateY(-50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
 .word-scrapper-results-container {
   width: 100%;
   height: fit-content;
@@ -5,8 +21,58 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 80px 0px;
+  margin-bottom: 20px;
 }
 
+.word-scrapper-results-table-container {
+  width: 90%;
+  height: fit-content;
+  height: -moz-fit-content;
+  background-color: #1b1b1b;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 5px;
+  max-width: 1300px;
+  animation: resultsInitAnim 1200ms forwards;
+}
+
+.word-scrapper-results-head {
+  width: 100%;
+  height: fit-content;
+  height: -moz-fit-content;
+  text-align: center;
+  border-bottom: 1px solid #727272;
+}
+
+.word-scrapper-results-head p {
+  margin-top: 0px;
+}
+
+.word-scrapper-results-table {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  margin: 4px 5px;
+  padding: 3px;
+  background-color: #0f0f0f;
+  border-radius: 5px;
+}
+
+.word-scrapper-results-table h2 {
+  margin: 3px;
+  padding: 5px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.word-scrapper-results-table p {
+  margin: 3px;
+  padding: 5px;
+}
+
+/* Spinner Stylings */
 .spinner {
   margin: 100px auto 0;
   width: 130px;

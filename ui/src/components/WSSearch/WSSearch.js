@@ -5,7 +5,7 @@ import { BiSearchAlt } from "react-icons/bi";
 // Styles
 import "./WSSearchStyle.css";
 
-function WSSearch({ word, searchedWord }) {
+function WSSearch({ word, searchedWord, mainPage }) {
   const history = useHistory();
 
   function searchWord() {
@@ -14,7 +14,7 @@ function WSSearch({ word, searchedWord }) {
       .value.trim();
     if (!searchBarContent) return;
     history.push("/search/" + searchBarContent);
-    searchedWord(searchBarContent);
+    if (!mainPage) searchedWord(searchBarContent);
   }
 
   return (

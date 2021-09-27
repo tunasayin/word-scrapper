@@ -2,7 +2,7 @@
 import { Fragment } from "react";
 
 // Compontents
-import WSSearchStyle from "../../components/WSSearch/WSSearch";
+import WSSearch from "../../components/WSSearch/WSSearch";
 
 // Styles
 import "./MainStyle.css";
@@ -16,7 +16,7 @@ function MainPage() {
           <p>Basic word information collector that makes your life easier.</p>
         </div>
         <div className="word-scrapper-mainPage-body">
-          <WSSearchStyle />
+          <WSSearch mainPage={true} />
         </div>
       </div>
     </Fragment>

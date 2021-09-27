@@ -1,7 +1,7 @@
+const { default: axios } = require("axios");
 const express = require("express");
 const app = express();
 const path = require("path");
-const fetch = require("node-fetch");
 const config = require("./config.json");
 
 app.use("/", express.static(path.join(__dirname, "..", "ui", "build")));
@@ -15,16 +15,24 @@ app.get("/api/getWord/:word", (req, res) => {
       })
       .end();
 
-  fetch(`https://wordsapiv1.p.rapidapi.com/words/${req.params.word.trim()}`, {
+  console.log(
+    `https://wordsapiv1.p.rapidapi.com/words/${req.params.word.trim()}`
+  );
+
+  const options = {
+    method: "GET",
+    url: `https://wordsapiv1.p.rapidapi.com/words/${req.params.word.trim()}`,
     headers: {
       "x-rapidapi-host": config.api.host,
       "x-rapidapi-key": config.api.key,
     },
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.message) {
-        res.json({ statusCode: 200, data: data }).end();
+  };
+
+  axios
+    .request(options)
+    .then((serverRes) => {
+      if (!serverRes.data.message) {
+        res.json({ statusCode: 200, data: serverRes.data }).end();
       } else {
         res
           .json({
@@ -35,6 +43,7 @@ app.get("/api/getWord/:word", (req, res) => {
       }
     })
     .catch((err) => {
+      console.log(err);
       res.json({ statusCode: 500, message: "Server Error!" });
     });
 });

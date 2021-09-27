@@ -12,30 +12,36 @@ import "./SearchStyle.css";
 function Search() {
   const history = useHistory();
   const { word: paramWord } = useParams();
-  const [results, setResults] = useState(null);
+  const [results, setResults] = useState({});
 
   if (!paramWord) history.push("/");
+
+  function searchWord(a) {
+    // fetch(`/api/getWord/${a}`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.statusCode == 200) {
+    //       const definitions = [];
+    //       const antonyms = [];
+    //       const synonyms = [];
+    //       const examples = [];
+    //       setResults({
+    //         word: data.data.word,
+    //         definitions: definitions,
+    //         antonyms: antonyms,
+    //         synonyms: synonyms,
+    //         example_sentences: examples,
+    //       });
+    //     }
+    //   });
+    // setResults({ wow: true });
+    // eslint-disable-next-line
+  }
 
   useEffect(() => {
     searchWord(paramWord);
     //eslint-disable-next-line
   }, []);
-
-  function searchWord(a) {
-    console.log("searched word", a);
-    setResults({ wow: true });
-    return;
-    fetch(`/api/getWord/${a}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.statusCode == 200) {
-          setResults(data.data);
-        }
-      });
-
-    setResults({ wow: true });
-    //eslint-disable-next-line
-  }
 
   return (
     <div className="word-scrapper-searchPage-container">
