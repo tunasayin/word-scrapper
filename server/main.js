@@ -15,10 +15,6 @@ app.get("/api/getWord/:word", (req, res) => {
       })
       .end();
 
-  console.log(
-    `https://wordsapiv1.p.rapidapi.com/words/${req.params.word.trim()}`
-  );
-
   const options = {
     method: "GET",
     url: `https://wordsapiv1.p.rapidapi.com/words/${req.params.word.trim()}`,

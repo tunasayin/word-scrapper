@@ -12,30 +12,40 @@ import "./SearchStyle.css";
 function Search() {
   const history = useHistory();
   const { word: paramWord } = useParams();
-  const [results, setResults] = useState({});
+  const [results, setResults] = useState([]);
 
   if (!paramWord) history.push("/");
 
   function searchWord(a) {
-    // fetch(`/api/getWord/${a}`)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.statusCode == 200) {
-    //       const definitions = [];
-    //       const antonyms = [];
-    //       const synonyms = [];
-    //       const examples = [];
-    //       setResults({
-    //         word: data.data.word,
-    //         definitions: definitions,
-    //         antonyms: antonyms,
-    //         synonyms: synonyms,
-    //         example_sentences: examples,
-    //       });
-    //     }
-    //   });
-    // setResults({ wow: true });
-    // eslint-disable-next-line
+    fetch(`/api/getWord/${a}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.statusCode == 200) {
+          const results = [];
+          data.data.results.forEach((result) => {
+            const targetResult = results.find(
+              (x) => x.type == result.partOfSpeech
+            );
+            if (targetResult) {
+              targetResult.definitions.push(result.definition);
+              if (result.synonyms) targetResult.synonyms.push(result.synonyms);
+              if (result.antonyms) targetResult.antonyms.push(result.antonyms);
+              if (result.examples)
+                targetResult.exampleSentences.push(result.examples);
+            } else {
+              results.push({
+                word: data.data.word,
+                type: result.partOfSpeech,
+                definitions: [result.definition],
+                synonyms: result?.synonyms || [],
+                antonyms: result?.antonyms || [],
+                exampleSentences: result?.examples || [],
+              });
+            }
+          });
+          setResults(results);
+        }
+      });
   }
 
   useEffect(() => {
@@ -50,7 +60,9 @@ function Search() {
         <WSSearch word={paramWord} searchedWord={searchWord} />
       </div>
       <div className="word-scrapper-searchPage-body">
-        <WSResults results={results} />
+        {results.map((result) => {
+          return <WSResults results={result} />;
+        })}
       </div>
     </div>
   );
