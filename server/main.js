@@ -39,7 +39,6 @@ app.get("/api/getWord/:word", (req, res) => {
       }
     })
     .catch((err) => {
-      console.log(err);
       res.json({ statusCode: 500, message: "Server Error!" });
     });
 });

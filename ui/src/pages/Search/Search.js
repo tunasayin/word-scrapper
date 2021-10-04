@@ -1,5 +1,5 @@
 // Modules
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 // Compontents
@@ -17,6 +17,7 @@ function Search() {
   if (!paramWord) history.push("/");
 
   function searchWord(a) {
+    setResults([]);
     fetch(`/api/getWord/${a}`)
       .then((res) => res.json())
       .then((data) => {
@@ -56,13 +57,13 @@ function Search() {
   return (
     <div className="word-scrapper-searchPage-container">
       <div className="word-scrapper-searchPage-head">
-        <h1>Word Scrapper</h1>
+        <Link to="/">Word Scrapper</Link>
         <WSSearch word={paramWord} searchedWord={searchWord} />
       </div>
       <div className="word-scrapper-searchPage-body">
-        {results.map((result) => {
-          return <WSResults results={result} />;
-        })}
+        {
+          results.length == 0 ? <WSResults results={[]} /> : results.map(result => <WSResults results={result} />)
+        }
       </div>
     </div>
   );

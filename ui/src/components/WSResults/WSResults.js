@@ -5,7 +5,7 @@ function WSResults({ results }) {
   let defCount = 0;
   let exampCount = 0;
 
-  if (!results) {
+  if (!results || results?.length == 0) {
     return (
       <div className="word-scrapper-results-container">
         <div className="spinner">
@@ -66,6 +66,7 @@ function WSResults({ results }) {
                 </p>
               );
             })}
+            {results?.exampleSentences.length == 0 ? <p>None</p> : ""}
           </div>
         </div>
       </div>

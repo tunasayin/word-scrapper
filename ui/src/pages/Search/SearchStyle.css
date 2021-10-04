@@ -18,6 +18,18 @@
   animation: headPartAnim 800ms forwards;
 }
 
+.word-scrapper-searchPage-head a {
+  font-size: 45px;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  transition: all 450ms ease;
+}
+
+.word-scrapper-searchPage-head a:hover {
+  color: #c4c1c1;
+}
+
 @keyframes headPartAnim {
   0% {
     transform: translateY(150px);
