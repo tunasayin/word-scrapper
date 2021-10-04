@@ -46,6 +46,12 @@ function Search() {
           });
           setResults(results);
         }
+        else {
+
+          setResults(null)
+        }
+      }).catch(err => {
+        setResults(null);
       });
   }
 
@@ -58,11 +64,11 @@ function Search() {
     <div className="word-scrapper-searchPage-container">
       <div className="word-scrapper-searchPage-head">
         <Link to="/">Word Scrapper</Link>
-        <WSSearch word={paramWord} searchedWord={searchWord} />
+        <WSSearch word={paramWord} clearOnSearch={true} searchedWord={searchWord} />
       </div>
       <div className="word-scrapper-searchPage-body">
         {
-          results.length == 0 ? <WSResults results={[]} /> : results.map(result => <WSResults results={result} />)
+          results && results.length > 0 ?  results.map(result => <WSResults results={result} />) : <WSResults results={results} />
         }
       </div>
     </div>

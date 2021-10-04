@@ -5,7 +5,17 @@ function WSResults({ results }) {
   let defCount = 0;
   let exampCount = 0;
 
-  if (!results || results?.length == 0) {
+  if (!results) {
+    return (
+      <div className="word-scrapper-results-container">
+        <div className="word-scrapper-results-notFound">
+          <h1>Ooops!</h1>
+          <p>It looks like we couldn't find your word on resources we use.</p>
+        </div>
+      </div>
+    )
+  }
+  else if (results.length == 0) {
     return (
       <div className="word-scrapper-results-container">
         <div className="spinner">
@@ -15,7 +25,8 @@ function WSResults({ results }) {
         </div>
       </div>
     );
-  } else {
+  } 
+  else {
     return (
       <div className="word-scrapper-results-container">
         <div className="word-scrapper-results-table-container">

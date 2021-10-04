@@ -49,3 +49,11 @@
     width: 65%;
   }
 }
+
+@media only screen and (max-width: 1000px) {
+  .word-scrapper-searchPage-head {
+    padding: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+}

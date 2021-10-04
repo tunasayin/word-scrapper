@@ -31,6 +31,7 @@ app.get("/api/getWord/:word", (req, res) => {
         res.json({ statusCode: 200, data: serverRes.data }).end();
       } else {
         res
+          .status(404) 
           .json({
             statusCode: 404,
             message: "Word couldn't found in the dictionary.",
@@ -39,7 +40,13 @@ app.get("/api/getWord/:word", (req, res) => {
       }
     })
     .catch((err) => {
-      res.json({ statusCode: 500, message: "Server Error!" });
+      res
+      .status(404) 
+      .json({
+        statusCode: 404,
+        message: "Word couldn't found in the dictionary.",
+      })
+      .end();
     });
 });
 

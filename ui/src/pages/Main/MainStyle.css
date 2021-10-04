@@ -20,3 +20,14 @@
   flex-direction: column;
   align-items: center;
 }
+
+@media only screen and (max-width: 1000px) {
+  .word-scrapper-mainPage-container {
+    box-sizing: border-box;
+    padding: 40px;
+  }
+
+  .word-scrapper-mainPage-head {
+    text-align: center;
+  }
+}

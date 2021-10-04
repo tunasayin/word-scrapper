@@ -5,7 +5,7 @@ import { BiSearchAlt } from "react-icons/bi";
 // Styles
 import "./WSSearchStyle.css";
 
-function WSSearch({ word, searchedWord, mainPage }) {
+function WSSearch({ word, searchedWord, clearOnSearch, mainPage }) {
   const history = useHistory();
 
   function searchWord() {
@@ -15,6 +15,7 @@ function WSSearch({ word, searchedWord, mainPage }) {
     if (!searchBarContent) return;
     history.push("/search/" + searchBarContent);
     if (!mainPage) searchedWord(searchBarContent);
+    if (clearOnSearch) document.getElementById("word-scrapper-search-input").value = '';
   }
 
   return (
