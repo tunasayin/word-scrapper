@@ -1,6 +1,6 @@
 {
   "short_name": "WordScrapper",
-  "name": "Word Scrapper",
+  "name": "WordScrapper",
   "icons": [],
   "start_url": ".",
   "display": "standalone",

@@ -1,6 +1,7 @@
 // Modules
 import { useParams, useHistory, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 // Compontents
 import WSSearch from "../../components/WSSearch/WSSearch";
@@ -13,6 +14,7 @@ function Search() {
   const history = useHistory();
   const { word: paramWord } = useParams();
   const [results, setResults] = useState([]);
+  const [title, setTitle] = useState("Loading");
 
   if (!paramWord) history.push("/");
 
@@ -45,13 +47,17 @@ function Search() {
             }
           });
           setResults(results);
+          setTitle(a);
         }
         else {
 
           setResults(null)
+          setTitle(a);
         }
       }).catch(err => {
+
         setResults(null);
+        setTitle(a);
       });
   }
 
@@ -62,6 +68,9 @@ function Search() {
 
   return (
     <div className="word-scrapper-searchPage-container">
+      <Helmet>
+        <title>{title} - Word Scrapper</title>
+      </Helmet>
       <div className="word-scrapper-searchPage-head">
         <Link to="/">Word Scrapper</Link>
         <WSSearch word={paramWord} clearOnSearch={true} searchedWord={searchWord} />

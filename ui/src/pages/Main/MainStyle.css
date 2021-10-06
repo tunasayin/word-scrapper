@@ -31,3 +31,13 @@
     text-align: center;
   }
 }
+
+@media only screen and (max-width: 400px) {
+  .word-scrapper-mainPage-head h1 {
+    font-size: 42px;
+  }
+
+  .word-scrapper-mainPage-head p {
+    font-size: 18px;
+  }
+}
