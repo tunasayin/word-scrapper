@@ -1,3 +1,15 @@
+@keyframes mainPageAnim {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .word-scrapper-mainPage-container {
   height: fit-content;
   height: -moz-fit-content;
@@ -6,6 +18,7 @@
   padding: 15px;
   position: relative;
   z-index: 100;
+  animation: mainPageAnim 600ms forwards;
 }
 
 .word-scrapper-mainPage-head {
