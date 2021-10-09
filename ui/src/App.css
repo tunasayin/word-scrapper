@@ -57,8 +57,7 @@ p {
 }
 
 .word-scrapper-wrapper > div:first-child {
-  height: 100vh;
-  overflow-y: scroll;
+  width: 100vw;
   overflow-x: hidden;
 }
 

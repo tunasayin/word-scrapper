@@ -35,7 +35,16 @@ function WSResults({ results }) {
             style={{ marginTop: "10px" }}
             className="word-scrapper-results-table"
           >
-            <h2>Definition(s)</h2>
+            <div className="word-scrapper-results-table-head">
+              <h2>Definition(s)</h2>
+              <p>
+                Fetched from
+                <a href="https://dictionary.cambridge.org/">
+                  &nbsp;Cambridge Dictionary
+                </a>
+                .
+              </p>
+            </div>
             {results?.definitions?.map((def) => {
               defCount++;
               return (
@@ -56,7 +65,12 @@ function WSResults({ results }) {
           </div>
 
           <div className="word-scrapper-results-table">
-            <h2>Synonym(s)</h2>
+            <div className="word-scrapper-results-table-head">
+              <h2>Synonym(s)</h2>
+              <p>
+                Fetched from <a href="https://www.thesaurus.com/">TheSaurus</a>.
+              </p>
+            </div>
             <p>
               {results.synonyms.length == 0
                 ? "None"
@@ -65,7 +79,12 @@ function WSResults({ results }) {
           </div>
 
           <div className="word-scrapper-results-table">
-            <h2>Antonym(s)</h2>
+            <div className="word-scrapper-results-table-head">
+              <h2>Antonym(s)</h2>
+              <p>
+                Fetched from <a href="https://www.thesaurus.com/">TheSaurus</a>.
+              </p>
+            </div>
             <p>
               {results.antonyms.length == 0
                 ? "None"
@@ -74,7 +93,13 @@ function WSResults({ results }) {
           </div>
 
           <div className="word-scrapper-results-table">
-            <h2>Word Formation(s)</h2>
+            <div className="word-scrapper-results-table-head">
+              <h2>Word Formation(s)</h2>
+
+              <p>
+                Fetched from <a href="https://www.wordhippo.com/">WordHippo</a>.
+              </p>
+            </div>
             <p>
               {results.wordForms.length == 0
                 ? "None"
@@ -83,7 +108,17 @@ function WSResults({ results }) {
           </div>
 
           <div className="word-scrapper-results-table">
-            <h2>Example Sentence(s)</h2>
+            <div className="word-scrapper-results-table-head">
+              <h2>Example Sentence(s)</h2>
+
+              <p>
+                Fetched from
+                <a href="https://dictionary.cambridge.org/">
+                  &nbsp;Cambridge Dictionary
+                </a>
+                .
+              </p>
+            </div>
             {results?.exampleSentences?.map((sentence) => {
               exampCount++;
               return (
