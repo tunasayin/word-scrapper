@@ -13,9 +13,8 @@ function WSResults({ results }) {
           <p>It looks like we couldn't find your word on resources we use.</p>
         </div>
       </div>
-    )
-  }
-  else if (results.length == 0) {
+    );
+  } else if (results.length == 0) {
     return (
       <div className="word-scrapper-results-container">
         <div className="spinner">
@@ -25,14 +24,12 @@ function WSResults({ results }) {
         </div>
       </div>
     );
-  } 
-  else {
+  } else {
     return (
       <div className="word-scrapper-results-container">
         <div className="word-scrapper-results-table-container">
           <div className="word-scrapper-results-head">
             <h1>{results?.word || "Word"}</h1>
-            <p>({results?.type || "None"})</p>
           </div>
           <div
             style={{ marginTop: "10px" }}
@@ -42,8 +39,17 @@ function WSResults({ results }) {
             {results?.definitions?.map((def) => {
               defCount++;
               return (
-                <p style={{ textTransform: "capitalize" }}>
-                  {defCount} - {def || "None"}
+                <p
+                  style={{
+                    textTransform: "capitalize",
+                    borderBottom: "1px solid #252525",
+                    padding: "7px",
+                  }}
+                >
+                  <span style={{ color: "white", fontWeight: "bold" }}>
+                    {defCount}
+                  </span>
+                  &nbsp;- {def || "None"}
                 </p>
               );
             })}
@@ -68,12 +74,29 @@ function WSResults({ results }) {
           </div>
 
           <div className="word-scrapper-results-table">
+            <h2>Word Formation(s)</h2>
+            <p>
+              {results.wordForms.length == 0
+                ? "None"
+                : results?.wordForms?.join(", ")}
+            </p>
+          </div>
+
+          <div className="word-scrapper-results-table">
             <h2>Example Sentence(s)</h2>
             {results?.exampleSentences?.map((sentence) => {
               exampCount++;
               return (
-                <p style={{ textTransform: "capitalize" }}>
-                  {exampCount} - {sentence || "None"}
+                <p
+                  style={{
+                    borderBottom: "1px solid #252525",
+                    padding: "7px",
+                  }}
+                >
+                  <span style={{ color: "white", fontWeight: "bold" }}>
+                    {exampCount}
+                  </span>{" "}
+                  - {sentence || "None"}
                 </p>
               );
             })}

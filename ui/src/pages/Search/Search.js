@@ -23,41 +23,20 @@ function Search() {
     fetch(`/api/getWord/${a}`)
       .then((res) => res.json())
       .then((data) => {
-        if (data.statusCode == 200) {
-          const results = [];
-          data.data.results.forEach((result) => {
-            const targetResult = results.find(
-              (x) => x.type == result.partOfSpeech
-            );
-            if (targetResult) {
-              targetResult.definitions.push(result.definition);
-              if (result.synonyms) targetResult.synonyms.push(result.synonyms);
-              if (result.antonyms) targetResult.antonyms.push(result.antonyms);
-              if (result.examples)
-                targetResult.exampleSentences.push(result.examples);
-            } else {
-              results.push({
-                word: data.data.word,
-                type: result.partOfSpeech,
-                definitions: [result.definition],
-                synonyms: result?.synonyms || [],
-                antonyms: result?.antonyms || [],
-                exampleSentences: result?.examples || [],
-              });
-            }
-          });
-          setResults(results);
-          setTitle(a);
-        }
-        else {
-
-          setResults(null)
-          setTitle(a);
-        }
-      }).catch(err => {
-
-        setResults(null);
+        if (data?.statusCode !== 200)
+          throw new Error("Status code is not equal to 200.");
+        data.word = a;
+        const wordF = [];
+        data.wordForms.forEach((wordForm) =>
+          wordF.push(`${wordForm.word} (${wordForm.type})`)
+        );
+        data.wordForms = wordF;
+        setResults([data]);
         setTitle(a);
+      })
+      .catch((err) => {
+        setResults(null);
+        setTitle("Not Found");
       });
   }
 
@@ -73,12 +52,34 @@ function Search() {
       </Helmet>
       <div className="word-scrapper-searchPage-head">
         <Link to="/">Word Scrapper</Link>
-        <WSSearch word={paramWord} clearOnSearch={true} searchedWord={searchWord} />
+        <WSSearch
+          word={paramWord}
+          clearOnSearch={true}
+          searchedWord={searchWord}
+        />
       </div>
       <div className="word-scrapper-searchPage-body">
-        {
-          results && results.length > 0 ?  results.map(result => <WSResults results={result} />) : <WSResults results={results} />
-        }
+        <WSResults results={results} />
+        <WSResults results={results} />
+        <WSResults results={results} />
+        <WSResults results={results} />
+        <WSResults results={results} />
+        <WSResults results={results} />
+        <WSResults results={results} />
+        <WSResults results={results} />
+        <WSResults results={results} />
+        <WSResults results={results} />
+        <WSResults results={results} />
+        <WSResults results={results} />
+        <WSResults results={results} />
+        <WSResults results={results} />
+        <WSResults results={results} />
+        <WSResults results={results} />
+        {results && results.length > 0 ? (
+          results.map((result) => <WSResults results={result} />)
+        ) : (
+          <WSResults results={results} />
+        )}
       </div>
     </div>
   );

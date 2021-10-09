@@ -23,7 +23,12 @@ apiRouter.get("/getWord/:word?", async (req, res) => {
     `http://localhost:3000/api/getWordForms/${req.params.word}`
   ).then((res) => res.json());
 
-  res.status(200).json({ ...defsExs, ...antsSyns, ...wForms });
+  if (defsExs.definitions.length == 0)
+    res.status(404).json({ statusCode: 404, message: "Not Found" });
+  else
+    res
+      .status(200)
+      .json({ statusCode: 200, ...defsExs, ...antsSyns, ...wForms });
 });
 
 apiRouter.get("/getDefs/:word?", async (req, res) => {
