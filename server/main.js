@@ -1,7 +1,6 @@
-const { default: axios } = require("axios");
-const http = require('http');
-const fs = require('fs');
-const https = require('https');
+const http = require("http");
+const fs = require("fs");
+const https = require("https");
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -9,76 +8,46 @@ const config = require("./config.json");
 
 app.use("/", express.static(path.join(__dirname, "..", "ui", "build")));
 
-app.get("/api/getWord/:word", (req, res) => {
-  if (!req.params?.word)
-    return res
-      .json({
-        statusCode: 400,
-        message: "Bad Request \n Abusing this endpoint will result in ip ban!",
-      })
-      .end();
-
-  const options = {
-    method: "GET",
-    url: `https://wordsapiv1.p.rapidapi.com/words/${req.params.word.trim()}`,
-    headers: {
-      "x-rapidapi-host": config.api.host,
-      "x-rapidapi-key": config.api.key,
-    },
-  };
-
-  axios
-    .request(options)
-    .then((serverRes) => {
-      if (!serverRes.data.message) {
-        res.json({ statusCode: 200, data: serverRes.data }).end();
-      } else {
-        res
-          .status(404) 
-          .json({
-            statusCode: 404,
-            message: "Word couldn't found in the dictionary.",
-          })
-          .end();
-      }
-    })
-    .catch((err) => {
-      res
-      .status(404) 
-      .json({
-        statusCode: 404,
-        message: "Word couldn't found in the dictionary.",
-      })
-      .end();
-    });
-});
+const apiRouter = require("./routes/api");
+app.use("/api", apiRouter);
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "ui", "build", "index.html"));
+  res
+    .status(200)
+    .sendFile(path.join(__dirname, "..", "ui", "build", "index.html"));
 });
-
-// Certificate
-const privateKey = fs.readFileSync(path.join(__dirname, 'certs', 'privkey.pem'), 'utf8');
-const certificate = fs.readFileSync(path.join(__dirname, 'certs', 'cert.pem'), 'utf8');
-const ca = fs.readFileSync(path.join(__dirname, 'certs', 'chain.pem'), 'utf8');
 
 const credentials = {
-	key: privateKey,
-	cert: certificate,
-	ca: ca
+  key: fs.readFileSync(path.join(__dirname, "certs", "privkey.pem"), "utf8"),
+  cert: fs.readFileSync(path.join(__dirname, "certs", "cert.pem"), "utf8"),
+  ca: fs.readFileSync(path.join(__dirname, "certs", "chain.pem"), "utf8"),
 };
 
-const httpServer = http.createServer((req,res) => {
-  res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+// Aditional Funcs
+function reditectToHTTPS(req, res) {
+  res.writeHead(301, { Location: "https://" + req.headers["host"] + req.url });
   res.end();
-});
+}
 
+// Ports
+let httpPort = config.debug ? config.debugPort : 80;
+let httpsPort = 443;
+
+// Servers
+const httpServer = http.createServer(config.debug ? app : reditectToHTTPS);
 const httpsServer = https.createServer(credentials, app);
 
-httpServer.listen(80)
-httpsServer.listen(443, () => {
-  console.log(
-    "Word scrapper port ",
-    config.websitePort + " üzerinde başlatıldı!"
+try {
+  httpServer.listen(httpPort);
+  if (!config.debug) httpsServer.listen(httpsPort);
+} catch (err) {
+  return console.error(
+    `Word Scrapper HTTP suncucuları başlatılamadı! \n \n [ERROR NAME]: ${err.name} \n [ERROR MESSAGE]: ${err.message} \n [ERROR STACK]: ${err.stack}`
   );
-})
+}
+
+console.log(
+  `Word Scrapper HTTP sunucuları başarı ile başlatıldı! \n HTTP Sunucu Port: \x1b[32m${httpPort}\x1b[0m \n HTTPS Sunucu Port: \x1b[32m${
+    config.debug ? "-" : httpsPort
+  }\x1b[0m`
+);
