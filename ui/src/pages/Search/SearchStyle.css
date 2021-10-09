@@ -1,7 +1,5 @@
 .word-scrapper-searchPage-container {
   width: 100%;
-  height: fit-content;
-  height: -moz-fit-content;
   position: relative;
   z-index: 100;
 }

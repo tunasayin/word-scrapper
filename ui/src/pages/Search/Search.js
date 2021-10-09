@@ -59,22 +59,6 @@ function Search() {
         />
       </div>
       <div className="word-scrapper-searchPage-body">
-        <WSResults results={results} />
-        <WSResults results={results} />
-        <WSResults results={results} />
-        <WSResults results={results} />
-        <WSResults results={results} />
-        <WSResults results={results} />
-        <WSResults results={results} />
-        <WSResults results={results} />
-        <WSResults results={results} />
-        <WSResults results={results} />
-        <WSResults results={results} />
-        <WSResults results={results} />
-        <WSResults results={results} />
-        <WSResults results={results} />
-        <WSResults results={results} />
-        <WSResults results={results} />
         {results && results.length > 0 ? (
           results.map((result) => <WSResults results={result} />)
         ) : (

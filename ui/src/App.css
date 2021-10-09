@@ -1,17 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 body {
-  height: 100vh;
-  position: fixed;
-  left: 0px;
-  top: 0px;
-  width: 100vw;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  margin: 0;
-  padding: 0;
-  background-color: #161616;
-  animation: fadeIn 600ms forwards;
+  z-index: 100000;
 }
 
 h1,
@@ -64,6 +54,12 @@ p {
   left: 0px;
   top: 0px;
   z-index: 0;
+}
+
+.word-scrapper-wrapper > div:first-child {
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .word-scrapper-background {
