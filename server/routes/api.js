@@ -6,6 +6,26 @@ const config = require("../config.json");
 
 module.exports = apiRouter;
 
+apiRouter.get("/getWord/:word?", async (req, res) => {
+  if (!req.params.word)
+    return res.status(400).json({
+      message: "Bad Request \n Abusing this endpoint will result in ip ban!",
+    });
+
+  const defsExs = await fetch(
+    `http://localhost:3000/api/getDefs/${req.params.word}`
+  ).then((res) => res.json());
+  const antsSyns = await fetch(
+    `http://localhost:3000/api/getAntsSyns/${req.params.word}`
+  ).then((res) => res.json());
+
+  const wForms = await fetch(
+    `http://localhost:3000/api/getWordForms/${req.params.word}`
+  ).then((res) => res.json());
+
+  res.status(200).json({ ...defsExs, ...antsSyns, ...wForms });
+});
+
 apiRouter.get("/getDefs/:word?", async (req, res) => {
   if (!req.params.word)
     return res.status(400).json({
@@ -67,30 +87,6 @@ apiRouter.get("/getAntsSyns/:word?", async (req, res) => {
 
   return res.status(200).json({
     synonyms: synonyms,
-    antonyms: antonyms,
-  });
-});
-
-apiRouter.get("/getAntonyms/:word?", async (req, res) => {
-  if (!req.params.word)
-    return res.status(400).json({
-      message: "Bad Request \n Abusing this endpoint will result in ip ban!",
-    });
-
-  const antonyms = [];
-
-  await fetch(config.sites.antonym.url.replace("$word", req.params.word))
-    .then((res) => res.text())
-    .then((html) => {
-      const $ = cheerio.load(html);
-      $(config.sites.antonym.query).each((x) => {
-        const el = $(config.sites.antonym.query).get(x);
-        const word = $(el).text();
-        antonyms.push(word);
-      });
-    });
-
-  return res.status(200).json({
     antonyms: antonyms,
   });
 });

@@ -1,7 +1,32 @@
 {
-  "api": {
-    "host": "",
-    "key": ""
-  },
-  "websitePort": 3000
+  "debug": true,
+  "debugPort": 3000,
+
+  "sites": {
+    "definiton": {
+      "url": "https://dictionary.cambridge.org/dictionary/english/$word",
+      "query": ".def"
+    },
+    "synonym": {
+      "url": "https://www.thesaurus.com/browse/$word",
+      "query": "#meanings .e1ccqdb60:nth-child(2) li a"
+    },
+    "antonym": {
+      "url": "https://www.thesaurus.com/browse/$word",
+      "query": "#antonyms .e1ccqdb60:nth-child(2) li a"
+    },
+    "wordForms": {
+      "urls": [
+        "https://www.wordhippo.com/what-is/the-verb-for/$word.html",
+        "https://www.wordhippo.com/what-is/the-adjective-for/$word.html",
+        "https://www.wordhippo.com/what-is/the-adverb-for/$word.html",
+        "https://www.wordhippo.com/what-is/the-noun-for/$word.html"
+      ],
+      "query": ".defv2wordtype"
+    },
+    "exampleSentences": {
+      "url": "https://dictionary.cambridge.org/dictionary/english/$word",
+      "query": ".deg"
+    }
+  }
 }
