@@ -1,3 +1,4 @@
+server/certs
 server/node_modules
 server/config.json
 ui/node_modules

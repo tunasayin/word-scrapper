@@ -13,14 +13,14 @@ apiRouter.get("/getWord/:word?", async (req, res) => {
     });
 
   const defsExs = await fetch(
-    `http://localhost:3000/api/getDefs/${req.params.word}`
+    `${config.baseURL}/api/getDefs/${req.params.word}`
   ).then((res) => res.json());
   const antsSyns = await fetch(
-    `http://localhost:3000/api/getAntsSyns/${req.params.word}`
+    `${config.baseURL}/api/getAntsSyns/${req.params.word}`
   ).then((res) => res.json());
 
   const wForms = await fetch(
-    `http://localhost:3000/api/getWordForms/${req.params.word}`
+    `${config.baseURL}/api/getWordForms/${req.params.word}`
   ).then((res) => res.json());
 
   if (defsExs.definitions.length == 0)
