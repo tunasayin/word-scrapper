@@ -4,6 +4,7 @@ Word scrapper is a basic tool that gathers grammatical information about the wor
 
 ### TODO
 
+- Display word formation that is linked to the definition.
 - Rewrite whole back-end with python.
 
 ### Known Bug(s)
