@@ -24,65 +24,6 @@ function Search() {
     setInputState(true);
     setResults([]);
     setTitle("Loading");
-    const data = {
-      statusCode: 200,
-      definitions: [
-        "used to show surprise and sometimes pleasure: ",
-        "a person or thing that is very successful, attractive, or pleasant: ",
-        "to make someone feel great excitement or admiration: ",
-        "used to show surprise or pleasure: ",
-      ],
-      exampleSentences: [
-        "Wow! Did you make that cake? It looks delicious!",
-        "He's a real wow with the girls in his class.",
-        "The movie wowed audiences with its amazing special effects.",
-        "Wow! Did you hear that noise?",
-      ],
-      synonyms: [
-        "charm",
-        "entertain",
-        "cheer",
-        "kill",
-        "slay",
-        "tickle",
-        "bowl over",
-        "break one up",
-        "crack up",
-        "go over big",
-        "knock dead",
-        "knock someone's socks off",
-        "make laugh",
-        "make roll in the aisles",
-        "tickle pink",
-        "tickle to death",
-      ],
-      antonyms: ["bear", "create", "give birth"],
-      wordForms: [
-        { word: "wow", type: "verb" },
-        { word: "wows", type: "verb" },
-        { word: "wowed", type: "verb" },
-        { word: "wowing", type: "verb" },
-        { word: "wowed", type: "adjective" },
-        { word: "wowing", type: "adjective" },
-        { word: "wow", type: "noun" },
-        { word: "wowser", type: "noun" },
-        { word: "wowzer", type: "noun" },
-        { word: "wowsers", type: "noun" },
-        { word: "wowzers", type: "noun" },
-      ],
-    };
-    if (data?.statusCode !== 200)
-      throw new Error("Status code is not equal to 200.");
-    data.word = a;
-    const wordF = [];
-    data.wordForms.forEach((wordForm) =>
-      wordF.push(`${wordForm.word} (${wordForm.type})`)
-    );
-    data.wordForms = wordF;
-    setInputState(false);
-    setResults([data]);
-    setTitle(a);
-    return;
     fetch(`/api/getWord/${a}`)
       .then((res) => res.json())
       .then((data) => {
