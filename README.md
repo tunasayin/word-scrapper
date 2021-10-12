@@ -1,11 +1,11 @@
-# Basic word scrapper
+# Word Scrapper
 
 Word scrapper is a basic tool that gathers grammatical information about the word that is specified.
 
-# TODO
+### TODO
 
-- Collapse components
+- Rewrite whole back-end with python.
 
-# Known Bug(s)
+### Known Bug(s)
 
 - Sometimes it does not find a word that is valid.

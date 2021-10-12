@@ -70,6 +70,9 @@
   margin: 3px;
   font-weight: bold;
   background-color: #212325;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .word-scrapper-results-table-head h2 {
@@ -97,6 +100,64 @@
   margin: 3px;
   padding: 5px;
   color: #d4d3d3;
+}
+
+.word-scrapper-results-table-body {
+  overflow: hidden;
+  height: fit-content;
+  height: -moz-fit-content;
+  animation: compInitAnim 700ms forwards;
+}
+
+.word-scrapper-results-table-collapse-btn {
+  font-size: 30px;
+  padding: 5px;
+  margin: 10px;
+  cursor: pointer;
+  transition: all 450ms ease;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.word-scrapper-results-table-collapse-btn:hover {
+  background-color: #686767c4;
+}
+
+.word-scrapper-results-table-collapse-btn-icon {
+  transition: all 450ms ease;
+  transform: rotate(-90deg);
+}
+
+.word-scrapper-results-table-collapse-btn-icon-active {
+  transform: rotate(0deg);
+}
+
+@keyframes compInitAnim {
+  0% {
+    opacity: 0;
+    display: none;
+  }
+
+  100% {
+    display: block;
+    opacity: 1;
+  }
+}
+
+@keyframes collapseAnim {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    max-height: 0px;
+  }
+}
+
+.word-scrapper-results-table-collapsed {
+  animation: collapseAnim 700ms forwards;
 }
 
 .spinner {
