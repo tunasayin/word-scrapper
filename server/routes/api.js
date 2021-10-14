@@ -3,6 +3,7 @@ const cheerio = require("cheerio");
 const express = require("express");
 const apiRouter = express.Router();
 const config = require("../config.json");
+let wordCache = [];
 
 module.exports = apiRouter;
 
@@ -12,9 +13,23 @@ apiRouter.get("/getWord/:word?", async (req, res) => {
       message: "Bad Request \n Abusing this endpoint will result in ip ban!",
     });
 
+  const cacheWord = wordCache.find((x) => x.word == req.params.word);
+
+  if (cacheWord?.data)
+    return res.status(200).json({
+      statusCode: 200,
+      ...cacheWord.data,
+    });
+
   const defsExs = await fetch(
     `${config.baseURL}/api/getDefs/${req.params.word}`
   ).then((res) => res.json());
+
+  const turkishDefs = await fetch(`
+  ${config.baseURL}/api/getTurkishDefs/${req.params.word}`).then((res) =>
+    res.json()
+  );
+
   const antsSyns = await fetch(
     `${config.baseURL}/api/getAntsSyns/${req.params.word}`
   ).then((res) => res.json());
@@ -25,10 +40,31 @@ apiRouter.get("/getWord/:word?", async (req, res) => {
 
   if (defsExs.definitions.length == 0)
     res.status(404).json({ statusCode: 404, message: "Not Found" });
-  else
-    res
-      .status(200)
-      .json({ statusCode: 200, ...defsExs, ...antsSyns, ...wForms });
+  else {
+    res.status(200).json({
+      statusCode: 200,
+      ...defsExs,
+      ...turkishDefs,
+      ...antsSyns,
+      ...wForms,
+    });
+
+    const doesContainWord =
+      wordCache.filter((x) => x.word == req.params.word).length == 0
+        ? false
+        : true;
+
+    if (doesContainWord) return;
+
+    wordCache.push({
+      word: req.params.word,
+      data: { ...defsExs, ...turkishDefs, ...antsSyns, ...wForms },
+    });
+
+    setTimeout(() => {
+      wordCache = wordCache.filter((x) => x.word !== req.params.word);
+    }, config.cacheResetTime * 60 * 1000);
+  }
 });
 
 apiRouter.get("/getDefs/:word?", async (req, res) => {
@@ -39,15 +75,17 @@ apiRouter.get("/getDefs/:word?", async (req, res) => {
 
   const defs = [];
   const exSentences = [];
+  const url = config.sites.definiton.url.replace("$word", req.params.word);
 
-  await fetch(config.sites.definiton.url.replace("$word", req.params.word))
+  await fetch(url)
     .then((res) => res.text())
     .then((html) => {
       const $ = cheerio.load(html);
       $(config.sites.definiton.query).each((x) => {
         const el = $(config.sites.definiton.query).get(x);
-        const text = $(el).text();
-        defs.push(text);
+        const text = $(el).text().trim();
+        if (defs.includes(text)) return;
+        defs.push(text.trim());
       });
 
       $(config.sites.exampleSentences.query).each((x) => {
@@ -59,8 +97,39 @@ apiRouter.get("/getDefs/:word?", async (req, res) => {
     .catch((Err) => {});
 
   return res.status(200).json({
+    defExsFetchedFrom: url,
     definitions: defs,
     exampleSentences: exSentences,
+  });
+});
+
+apiRouter.get("/getTurkishDefs/:word?", async (req, res) => {
+  if (!req.params.word)
+    return res.status(400).json({
+      message: "Bad Request \n Abusing this endpoint will result in ip ban!",
+    });
+
+  const defs = [];
+  const url = config.sites.turkishDefinition.url.replace(
+    "$word",
+    req.params.word
+  );
+
+  await fetch(url)
+    .then((res) => res.text())
+    .then((html) => {
+      const $ = cheerio.load(html);
+      $(config.sites.turkishDefinition.query).each((x) => {
+        const el = $(config.sites.turkishDefinition.query).get(x);
+        const text = $(el).text();
+        defs.push(text);
+      });
+    })
+    .catch((Err) => {});
+
+  return res.status(200).json({
+    turkishDefsFetchedFrom: url,
+    turkishDefinitions: defs,
   });
 });
 
@@ -72,8 +141,9 @@ apiRouter.get("/getAntsSyns/:word?", async (req, res) => {
 
   const synonyms = [];
   const antonyms = [];
+  const url = config.sites.synonym.url.replace("$word", req.params.word);
 
-  await fetch(config.sites.synonym.url.replace("$word", req.params.word))
+  await fetch(url)
     .then((res) => res.text())
     .then((html) => {
       const $ = cheerio.load(html);
@@ -91,6 +161,7 @@ apiRouter.get("/getAntsSyns/:word?", async (req, res) => {
     });
 
   return res.status(200).json({
+    antSynsFetchedFrom: url,
     synonyms: synonyms,
     antonyms: antonyms,
   });

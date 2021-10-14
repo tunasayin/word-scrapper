@@ -87,7 +87,7 @@ function WSResults({ results }) {
                 <h2>Definition(s)</h2>
                 <p>
                   Fetched from
-                  <a href="https://dictionary.cambridge.org/">
+                  <a href={results?.defExsFetchedFrom} target="_blank">
                     &nbsp;Cambridge Dictionary
                   </a>
                   .
@@ -121,10 +121,38 @@ function WSResults({ results }) {
           <div className="word-scrapper-results-table">
             <div className="word-scrapper-results-table-head">
               <div className="word-scrapper-results-table-head-content">
+                <h2>Turkish Definiton(s)</h2>
+                <p>
+                  Fetched from
+                  <a href={results?.turkishDefsFetchedFrom} target="_blank">
+                    &nbsp;Tureng
+                  </a>
+                  .
+                </p>
+              </div>
+              <div className="word-scrapper-results-table-collapse-btn">
+                <VscChevronDown className="word-scrapper-results-table-collapse-btn-icon word-scrapper-results-table-collapse-btn-icon-active" />
+              </div>
+            </div>
+            <div className="word-scrapper-results-table-body">
+              <p>
+                {results.turkishDefinitions.length == 0
+                  ? "None"
+                  : results?.turkishDefinitions?.join(", ")}
+              </p>
+            </div>
+          </div>
+
+          <div className="word-scrapper-results-table">
+            <div className="word-scrapper-results-table-head">
+              <div className="word-scrapper-results-table-head-content">
                 <h2>Synonym(s)</h2>
                 <p>
-                  Fetched from{" "}
-                  <a href="https://www.thesaurus.com/">TheSaurus</a>.
+                  Fetched from
+                  <a href={results?.antSynsFetchedFrom} target="_blank">
+                    &nbsp;TheSaurus
+                  </a>
+                  .
                 </p>
               </div>
               <div className="word-scrapper-results-table-collapse-btn">
@@ -145,8 +173,11 @@ function WSResults({ results }) {
               <div className="word-scrapper-results-table-head-content">
                 <h2>Antonym(s)</h2>
                 <p>
-                  Fetched from{" "}
-                  <a href="https://www.thesaurus.com/">TheSaurus</a>.
+                  Fetched from
+                  <a href={results?.antSynsFetchedFrom} target="_blank">
+                    &nbsp;TheSaurus
+                  </a>
+                  .
                 </p>
               </div>
               <div className="word-scrapper-results-table-collapse-btn">
@@ -168,8 +199,11 @@ function WSResults({ results }) {
                 <h2>Word Formation(s)</h2>
 
                 <p>
-                  Fetched from{" "}
-                  <a href="https://www.wordhippo.com/">WordHippo</a>.
+                  Fetched from
+                  <a href="https://www.wordhippo.com/" target="_blank">
+                    &nbsp;WordHippo
+                  </a>
+                  .
                 </p>
               </div>
               <div className="word-scrapper-results-table-collapse-btn">
@@ -191,7 +225,7 @@ function WSResults({ results }) {
                 <h2>Example Sentence(s)</h2>
                 <p>
                   Fetched from
-                  <a href="https://dictionary.cambridge.org/">
+                  <a href={results?.defExsFetchedFrom} target="_blank">
                     &nbsp;Cambridge Dictionary
                   </a>
                   .

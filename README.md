@@ -4,15 +4,13 @@ Word scrapper is a basic tool that gathers grammatical information about the wor
 
 ### 📝 TODO:
 
-- Cache system, to speed-up queries.
 - Show the references of words from the original website that word is fetched from.
-- Fetch Turkish definitons of a word and list it as well.
 - Bulk search mode.
 - Display word formation that is linked to the definition.
+- More propper word formation ui.
 - Rewrite whole back-end with python.
 
 ### 🐛 Known Bug(s):
 
-- May display the wrong first definition.
+- May display the wrong first definition when the input word is tensed.
 - Sometimes it does not find a word that is valid.
-- It may show duplicate definitions on some words: (palpable)
