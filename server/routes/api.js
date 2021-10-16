@@ -7,12 +7,27 @@ let wordCache = [];
 
 module.exports = apiRouter;
 
-apiRouter.get("/getWord/:word?", async (req, res) => {
-  if (!req.params.word)
-    return res.status(400).json({
-      message: "Bad Request \n Abusing this endpoint will result in ip ban!",
-    });
+apiRouter.get("/bulkSearch/:words", async (req, res) => {
+  const words = [];
+  const data = [];
 
+  req.params?.words.split(",").forEach((word) => {
+    words.push(word.trim());
+  });
+
+  for (var i = 0; i < words.length; i++) {
+    const d = await fetch(`${config.baseURL}/api/getWord/${words[i]}`)
+      .then((res) => res.json())
+      .then((d) => d.data)
+      .catch((err) => {});
+    if (!d) return;
+    data.push({ word: words[i], data: d });
+  }
+
+  return res.status(200).json(data);
+});
+
+apiRouter.get("/getWord/:word", async (req, res) => {
   const cacheWord = wordCache.find((x) => x.word == req.params.word);
 
   if (cacheWord?.data)
@@ -39,7 +54,7 @@ apiRouter.get("/getWord/:word?", async (req, res) => {
   ).then((res) => res.json());
 
   if (defsExs.definitions.length == 0)
-    res.status(404).json({ statusCode: 404, message: "Not Found" });
+    res.status(404).json({ statusCode: 404, message: "Word Not Found" });
   else {
     res.status(200).json({
       statusCode: 200,
@@ -67,12 +82,7 @@ apiRouter.get("/getWord/:word?", async (req, res) => {
   }
 });
 
-apiRouter.get("/getDefs/:word?", async (req, res) => {
-  if (!req.params.word)
-    return res.status(400).json({
-      message: "Bad Request \n Abusing this endpoint will result in ip ban!",
-    });
-
+apiRouter.get("/getDefs/:word", async (req, res) => {
   const defs = [];
   const exSentences = [];
   const url = config.sites.definiton.url.replace("$word", req.params.word);
@@ -103,12 +113,7 @@ apiRouter.get("/getDefs/:word?", async (req, res) => {
   });
 });
 
-apiRouter.get("/getTurkishDefs/:word?", async (req, res) => {
-  if (!req.params.word)
-    return res.status(400).json({
-      message: "Bad Request \n Abusing this endpoint will result in ip ban!",
-    });
-
+apiRouter.get("/getTurkishDefs/:word", async (req, res) => {
   const defs = [];
   const url = config.sites.turkishDefinition.url.replace(
     "$word",
@@ -133,12 +138,7 @@ apiRouter.get("/getTurkishDefs/:word?", async (req, res) => {
   });
 });
 
-apiRouter.get("/getAntsSyns/:word?", async (req, res) => {
-  if (!req.params.word)
-    return res.status(400).json({
-      message: "Bad Request \n Abusing this endpoint will result in ip ban!",
-    });
-
+apiRouter.get("/getAntsSyns/:word", async (req, res) => {
   const synonyms = [];
   const antonyms = [];
   const url = config.sites.synonym.url.replace("$word", req.params.word);
@@ -167,12 +167,7 @@ apiRouter.get("/getAntsSyns/:word?", async (req, res) => {
   });
 });
 
-apiRouter.get("/getWordForms/:word?", async (req, res) => {
-  if (!req.params.word)
-    return res.status(400).json({
-      message: "Bad Request \n Abusing this endpoint will result in ip ban!",
-    });
-
+apiRouter.get("/getWordForms/:word", async (req, res) => {
   const wordForms = [];
 
   for (var i = 0; i < config.sites.wordForms.urls.length; i++) {
@@ -199,5 +194,8 @@ apiRouter.get("/getWordForms/:word?", async (req, res) => {
 });
 
 apiRouter.get("/*", (req, res) => {
-  res.status(400).json({ message: "Bad Request" }).end();
+  if (!req.params.word)
+    return res.status(400).json({
+      message: "Bad Request \n Abusing this endpoint will result in ip ban!",
+    });
 });
