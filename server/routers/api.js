@@ -127,6 +127,7 @@ apiRouter.get("/getTurkishDefs/:word", async (req, res) => {
       $(config.sites.turkishDefinition.query).each((x) => {
         const el = $(config.sites.turkishDefinition.query).get(x);
         const text = $(el).text();
+        if (defs.includes(text) || defs.length >= 15) return;
         defs.push(text);
       });
     })
@@ -180,10 +181,14 @@ apiRouter.get("/getWordForms/:word", async (req, res) => {
         $(config.sites.wordForms.query).each((x) => {
           const el = $(config.sites.wordForms.query).get(x);
           const word = $(el).text();
-          wordForms.push({
-            word: word,
-            type: wordType,
-          });
+          if (wordForms.filter((x) => x.type === wordType).length !== 0) {
+            wordForms.find((x) => x.type === wordType)?.words.push(word);
+          } else {
+            wordForms.push({
+              type: wordType,
+              words: [word],
+            });
+          }
         });
       });
   }

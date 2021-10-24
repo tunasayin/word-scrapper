@@ -8,7 +8,7 @@ const config = require("./config.json");
 
 app.use("/", express.static(path.join(__dirname, "..", "ui", "build")));
 
-const apiRouter = require("./routes/api");
+const apiRouter = require("./routers/api");
 app.use("/api", apiRouter);
 
 app.get("*", (req, res) => {
