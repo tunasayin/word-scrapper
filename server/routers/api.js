@@ -95,7 +95,10 @@ apiRouter.get("/getDefs/:word", async (req, res) => {
         const el = $(config.sites.definiton.query).get(x);
         const text = $(el).text().trim();
         if (defs.includes(text)) return;
-        defs.push(text.trim());
+        const capitalized = (
+          text.charAt(0).toUpperCase() + text.slice(1)
+        ).trim();
+        defs.push(capitalized);
       });
 
       $(config.sites.exampleSentences.query).each((x) => {

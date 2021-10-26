@@ -6,6 +6,7 @@ import { VscChevronRight } from "react-icons/vsc";
 import "./WSResultCollapserStyle.css";
 
 function WSResultCollapser({ collapserName, collapserEls }) {
+  let count = 1;
   function collapse(e) {
     if (
       $(e.currentTarget)
@@ -38,7 +39,14 @@ function WSResultCollapser({ collapserName, collapserEls }) {
       </div>
       <div className="word-scrapper-results-collapser-body">
         {collapserEls.map((el) => {
-          return <p>{el}</p>;
+          return (
+            <p>
+              <span style={{ fontWeight: "bold", color: "white" }}>
+                {count++}
+              </span>{" "}
+              - {el}
+            </p>
+          );
         })}
       </div>
     </div>

@@ -10,6 +10,7 @@ import { VscChevronDown } from "react-icons/vsc";
 import "./WSResultsStyle.css";
 
 function WSResults({ results }) {
+  let key = 0;
   // Funcs
   useEffect(
     () => {
@@ -215,6 +216,7 @@ function WSResults({ results }) {
                 ? results.wordForms.map((wordForm) => {
                     return (
                       <WSResultCollapser
+                        key={key++}
                         collapserName={wordForm.type}
                         collapserEls={wordForm.words}
                       />
