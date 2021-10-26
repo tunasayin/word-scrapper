@@ -1,0 +1,57 @@
+.word-scrapper-results-collapser-container {
+  margin: 3px;
+  padding: 3px;
+}
+
+.word-scrapper-results-collapser-head {
+  width: 100%;
+  height: fit-content;
+  height: -moz-fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  transition: all 450ms ease;
+  cursor: pointer;
+  user-select: none;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 0px 5px;
+}
+
+.word-scrapper-results-collapser-head:hover {
+  background-color: #4b5dc1a9;
+}
+
+.word-scrapper-results-collapser-head h2 {
+  margin: 3px;
+}
+
+.word-scrapper-results-collapser-toggle {
+  padding: 3px;
+  float: left;
+  font-size: 20px;
+  transition: all 450ms ease;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.word-scrapper-results-collapser-body {
+  margin: 0px 5px;
+  display: none;
+}
+
+@keyframes activateAnim {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.word-scrapper-results-collapser-active {
+  display: block !important;
+  animation: activateAnim 500ms forwards;
+}

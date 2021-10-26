@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import $ from "jquery";
 
 // Compontents
+import WSResultCollapser from "../WSResultCollapser/WSResultCollapser";
 import { VscChevronDown } from "react-icons/vsc";
 
 // Styles
@@ -103,7 +104,6 @@ function WSResults({ results }) {
                 return (
                   <p
                     style={{
-                      textTransform: "capitalize",
                       borderBottom: "1px solid #252525",
                       padding: "7px",
                     }}
@@ -211,11 +211,16 @@ function WSResults({ results }) {
               </div>
             </div>
             <div className="word-scrapper-results-table-body">
-              <p>
-                {results.wordForms.length == 0
-                  ? "None"
-                  : results?.wordForms?.join(", ")}
-              </p>
+              {results?.wordForms?.length > 0
+                ? results.wordForms.map((wordForm) => {
+                    return (
+                      <WSResultCollapser
+                        collapserName={wordForm.type}
+                        collapserEls={wordForm.words}
+                      />
+                    );
+                  })
+                : "None"}
             </div>
           </div>
 

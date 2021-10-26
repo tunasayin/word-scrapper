@@ -30,11 +30,6 @@ function Search() {
         if (data?.statusCode !== 200)
           throw new Error("Status code is not equal to 200.");
         data.word = a;
-        const wordF = [];
-        data.wordForms.forEach((wordForm) =>
-          wordF.push(`${wordForm.word} (${wordForm.type})`)
-        );
-        data.wordForms = wordF;
         setInputState(false);
         setResults([data]);
         setTitle(a);

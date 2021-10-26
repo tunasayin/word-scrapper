@@ -47,7 +47,7 @@ try {
 }
 
 console.log(
-  `Word Scrapper HTTP sunucuları başarı ile başlatıldı! \n HTTP Sunucu Port: \x1b[32m${httpPort}\x1b[0m \n HTTPS Sunucu Port: \x1b[32m${
+  `Word Scrapper HTTP sunucuları başarı ile başlatıldı! \nHTTP Sunucu Port: \x1b[32m${httpPort}\x1b[0m \nHTTPS Sunucu Port: \x1b[32m${
     config.debug ? "-" : httpsPort
   }\x1b[0m`
 );
