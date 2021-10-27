@@ -20,25 +20,31 @@ function Search() {
 
   if (!paramWord) history.push("/");
 
-  function searchWord(a) {
+  async function searchWord(a) {
+    let url = `/api/getWord/${a}`;
+
+    // Reset states
     setInputState(true);
     setResults([]);
     setTitle("Loading");
-    fetch(`/api/getWord/${a}`)
+
+    const data = await fetch(url)
       .then((res) => res.json())
-      .then((data) => {
-        if (data?.statusCode !== 200)
-          throw new Error("Status code is not equal to 200.");
-        data.word = a;
-        setInputState(false);
-        setResults([data]);
-        setTitle(a);
-      })
-      .catch((err) => {
-        setInputState(false);
-        setResults(null);
-        setTitle("Not Found");
-      });
+      .catch((err) => {});
+
+    if (!data || data?.statusCode !== 200) {
+      setInputState(false);
+      setResults(null);
+      setTitle("Not Found");
+      return;
+    }
+
+    data.word = a;
+    setInputState(false);
+    if (Array.isArray(data)) setResults(data);
+    else setResults([data]);
+
+    setTitle(a);
   }
 
   useEffect(() => {

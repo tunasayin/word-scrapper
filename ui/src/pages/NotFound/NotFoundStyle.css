@@ -26,7 +26,7 @@
   text-decoration: none;
   font-weight: bold;
   padding: 12px;
-  background-color: #4b5dc1;
+  background-color: #6600ff;
   margin: 15px;
   color: white;
   border-radius: 6px;
@@ -35,5 +35,5 @@
 }
 
 .word-scrapper-notFoundPage-container a:hover {
-  background-color: #3e4c9c;
+  background-color: #5000c7;
 }

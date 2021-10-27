@@ -1,6 +1,7 @@
 .word-scrapper-results-collapser-container {
   margin: 3px;
   padding: 3px;
+  overflow: hidden;
 }
 
 .word-scrapper-results-collapser-head {
@@ -15,12 +16,12 @@
   cursor: pointer;
   user-select: none;
   padding: 5px;
+  box-sizing: border-box;
   border-radius: 5px;
-  margin: 0px 5px;
 }
 
 .word-scrapper-results-collapser-head:hover {
-  background-color: #4b5dc1a9;
+  background-color: #5302ce;
 }
 
 .word-scrapper-results-collapser-head h2 {

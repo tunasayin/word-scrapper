@@ -35,7 +35,7 @@
   cursor: pointer;
   transition: all 450ms ease;
   border-radius: 30px;
-  background-color: #4b5dc1;
+  background-color: #6600ff;
   position: absolute;
   right: 5px;
   top: 7px;
@@ -43,13 +43,13 @@
 }
 
 .word-scrapper-input-container:hover {
-  border-color: #4b5dc1;
+  border-color: #6600ff;
   -webkit-box-shadow: 0px 14px 50px -16px rgba(0, 0, 0, 0.72);
   box-shadow: 0px 14px 50px -16px rgba(0, 0, 0, 0.72);
 }
 
 .word-scrapper-input-container:focus {
-  border-color: #3a4791;
+  border-color: rgba(58, 71, 145, 0.767);
 }
 
 @media only screen and (max-width: 500px) {

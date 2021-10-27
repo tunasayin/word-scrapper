@@ -201,9 +201,26 @@ apiRouter.get("/getWordForms/:word", async (req, res) => {
   });
 });
 
+apiRouter.get("/", (req, res) => {
+  const registeredRoutes = [];
+  apiRouter.stack.forEach((layer) => {
+    if (
+      layer?.route &&
+      layer?.route?.path !== "/*" &&
+      layer?.route?.path !== "/"
+    )
+      registeredRoutes.push(layer.route.path);
+  });
+  return res.status(200).json({
+    statusCode: 200,
+    notice: "Bad Request \n Abusing this endpoint will result in ip ban!",
+    endpoints: registeredRoutes,
+  });
+});
+
 apiRouter.get("/*", (req, res) => {
-  if (!req.params.word)
-    return res.status(400).json({
-      message: "Bad Request \n Abusing this endpoint will result in ip ban!",
-    });
+  return res.status(400).json({
+    statusCode: 400,
+    message: "Bad Request",
+  });
 });

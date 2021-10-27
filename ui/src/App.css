@@ -27,12 +27,12 @@ p {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #4b5dc1;
+  background-color: #6600ff;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #3c4888;
+  background-color: #5304ca;
 }
 
 @keyframes fadeIn {
@@ -87,7 +87,7 @@ p {
 .word-scrapper-betaBadge {
   padding: 3px;
   margin: 8px auto;
-  background-color: #4b5dc1;
+  background-color: #6600ff;
   color: white;
   text-align: center;
   font-weight: bold;
