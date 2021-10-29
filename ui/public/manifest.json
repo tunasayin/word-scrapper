@@ -1,9 +1,15 @@
 {
   "short_name": "WordScrapper",
   "name": "WordScrapper",
-  "icons": [],
+  "icons": [
+    {
+      "src": "wsLogo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#4b5dc1",
+  "theme_color": "#6600ff",
   "background_color": "#ffffff"
 }
