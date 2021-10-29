@@ -21,7 +21,8 @@ function Search() {
   if (!paramWord) history.push("/");
 
   async function searchWord(a) {
-    let url = `/api/getWord/${a}`;
+    const words = a.trim().split(/ +/);
+    let url = `/api/bulkGetWord/${words.join(",")}`;
 
     // Reset states
     setInputState(true);
@@ -32,18 +33,15 @@ function Search() {
       .then((res) => res.json())
       .catch((err) => {});
 
-    if (!data || data?.statusCode !== 200) {
+    if (!data?.data || data?.statusCode !== 200) {
       setInputState(false);
       setResults(null);
       setTitle("Not Found");
       return;
     }
 
-    data.word = a;
     setInputState(false);
-    if (Array.isArray(data)) setResults(data);
-    else setResults([data]);
-
+    setResults(data.data);
     setTitle(a);
   }
 

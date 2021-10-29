@@ -27,7 +27,8 @@ p {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #6600ff;
+  background-color: #131313;
+  border: 1px solid #1f1e1e;
   border-radius: 3px;
 }
 

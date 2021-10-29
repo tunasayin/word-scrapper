@@ -7,7 +7,7 @@ let wordCache = [];
 
 module.exports = apiRouter;
 
-apiRouter.get("/bulkSearch/:words", async (req, res) => {
+apiRouter.get("/bulkGetWord/:words", async (req, res) => {
   const words = [];
   const data = [];
 
@@ -18,13 +18,13 @@ apiRouter.get("/bulkSearch/:words", async (req, res) => {
   for (var i = 0; i < words.length; i++) {
     const d = await fetch(`${config.baseURL}/api/getWord/${words[i]}`)
       .then((res) => res.json())
-      .then((d) => d.data)
       .catch((err) => {});
-    if (!d) return;
-    data.push({ word: words[i], data: d });
+    if (d.statusCode != 200) return;
+    delete d.statusCode;
+    data.push(d.data[0]);
   }
 
-  return res.status(200).json(data);
+  return res.status(200).json({ statusCode: 200, data });
 });
 
 apiRouter.get("/getWord/:word", async (req, res) => {
@@ -33,7 +33,7 @@ apiRouter.get("/getWord/:word", async (req, res) => {
   if (cacheWord?.data)
     return res.status(200).json({
       statusCode: 200,
-      ...cacheWord.data,
+      data: cacheWord.data,
     });
 
   const defsExs = await fetch(
@@ -58,10 +58,15 @@ apiRouter.get("/getWord/:word", async (req, res) => {
   else {
     res.status(200).json({
       statusCode: 200,
-      ...defsExs,
-      ...turkishDefs,
-      ...antsSyns,
-      ...wForms,
+      data: [
+        {
+          word: req.params.word,
+          ...defsExs,
+          ...turkishDefs,
+          ...antsSyns,
+          ...wForms,
+        },
+      ],
     });
 
     const doesContainWord =
@@ -73,7 +78,15 @@ apiRouter.get("/getWord/:word", async (req, res) => {
 
     wordCache.push({
       word: req.params.word,
-      data: { ...defsExs, ...turkishDefs, ...antsSyns, ...wForms },
+      data: [
+        {
+          word: req.params.word,
+          ...defsExs,
+          ...turkishDefs,
+          ...antsSyns,
+          ...wForms,
+        },
+      ],
     });
 
     setTimeout(() => {
