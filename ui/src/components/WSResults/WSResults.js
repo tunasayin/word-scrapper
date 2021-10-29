@@ -14,37 +14,41 @@ function WSResults({ results }) {
   // Funcs
   useEffect(
     () => {
-      $(".word-scrapper-results-table-collapse-btn-icon").on("click", (e) => {
-        const targetEl = $(e.currentTarget);
-        const isActive = targetEl.hasClass(
-          "word-scrapper-results-table-collapse-btn-icon-active"
-        );
-        if (isActive) {
-          // Collapse document
-
-          targetEl
-            .parent()
-            .parent()
-            .siblings()
-            .addClass("word-scrapper-results-table-collapsed");
-
-          targetEl.removeClass(
+      $(".word-scrapper-results-table-collapse-btn-icon")
+        .unbind("click")
+        .bind("click", (e) => {
+          console.log("Triggered!");
+          const targetEl = $(e.currentTarget);
+          const isActive = targetEl.hasClass(
             "word-scrapper-results-table-collapse-btn-icon-active"
           );
-        } else {
-          // Expand document
 
-          targetEl
-            .parent()
-            .parent()
-            .siblings()
-            .removeClass("word-scrapper-results-table-collapsed");
+          if (isActive) {
+            // Collapse document
 
-          targetEl.addClass(
-            "word-scrapper-results-table-collapse-btn-icon-active"
-          );
-        }
-      });
+            targetEl
+              .parent()
+              .parent()
+              .siblings(".word-scrapper-results-table-body")
+              .addClass("word-scrapper-results-table-collapsed");
+
+            targetEl.removeClass(
+              "word-scrapper-results-table-collapse-btn-icon-active"
+            );
+          } else {
+            // Expand document
+
+            targetEl
+              .parent()
+              .parent()
+              .siblings(".word-scrapper-results-table-body")
+              .removeClass("word-scrapper-results-table-collapsed");
+
+            targetEl.addClass(
+              "word-scrapper-results-table-collapse-btn-icon-active"
+            );
+          }
+        });
     },
     // eslint-disable-nextline
     []

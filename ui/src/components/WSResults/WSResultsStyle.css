@@ -131,7 +131,7 @@
 }
 
 .word-scrapper-results-table-collapse-btn-icon-active {
-  transform: rotate(0deg);
+  transform: rotate(0deg) !important;
 }
 
 @keyframes compInitAnim {
