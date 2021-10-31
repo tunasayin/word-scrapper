@@ -19,9 +19,10 @@ apiRouter.get("/bulkGetWord/:words", async (req, res) => {
     const d = await fetch(`${config.baseURL}/api/getWord/${words[i]}`)
       .then((res) => res.json())
       .catch((err) => {});
-    if (d.statusCode != 200) return;
-    delete d.statusCode;
-    data.push(d.data[0]);
+    if (d.statusCode === 200) {
+      delete d.statusCode;
+      data.push(d.data[0]);
+    }
   }
 
   return res.status(200).json({ statusCode: 200, data });
