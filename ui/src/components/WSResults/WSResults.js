@@ -216,17 +216,19 @@ function WSResults({ results }) {
               </div>
             </div>
             <div className="word-scrapper-results-table-body">
-              {results?.wordForms?.length > 0
-                ? results.wordForms.map((wordForm) => {
-                    return (
-                      <WSResultCollapser
-                        key={key++}
-                        collapserName={wordForm.type}
-                        collapserEls={wordForm.words}
-                      />
-                    );
-                  })
-                : "None"}
+              {results?.wordForms?.length > 0 ? (
+                results.wordForms.map((wordForm) => {
+                  return (
+                    <WSResultCollapser
+                      key={key++}
+                      collapserName={wordForm.type}
+                      collapserEls={wordForm.words}
+                    />
+                  );
+                })
+              ) : (
+                <p>None</p>
+              )}
             </div>
           </div>
 
