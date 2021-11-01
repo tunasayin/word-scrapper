@@ -223,11 +223,11 @@ apiRouter.get("/", (req, res) => {
       layer?.route?.path !== "/*" &&
       layer?.route?.path !== "/"
     )
-      registeredRoutes.push(layer.route.path);
+      registeredRoutes.push("GET " + layer.route.path);
   });
   return res.status(200).json({
     statusCode: 200,
-    notice: "Bad Request \n Abusing this endpoint will result in ip ban!",
+    notice: "Abusing these endpoint will result in ip ban!",
     endpoints: registeredRoutes,
   });
 });

@@ -10,5 +10,4 @@ Word scrapper is a basic tool that gathers grammatical information about the wor
 ### 🐛 Known Bug(s):
 
 - May display the wrong first definition when the input word is tensed.
-- Animation makes search result elements go into a ui bug when a word is searched.
 - Sometimes it does not find a word that is valid.

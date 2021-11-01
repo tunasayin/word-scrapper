@@ -1,7 +1,5 @@
 @keyframes resultsInitAnim {
   0% {
-    position: absolute;
-    top: 300px;
     opacity: 0;
     transform: translateY(100px);
   }
