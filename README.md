@@ -5,7 +5,7 @@ Word scrapper is a basic tool that gathers grammatical information about the wor
 ### 📝 TODO:
 
 - Show the references of words from the original website that word is fetched from.
-- Rewrite whole back-end with python.
+- Rewrite whole back-end with go.
 
 ### 🐛 Known Bug(s):
 
