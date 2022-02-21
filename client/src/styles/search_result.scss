@@ -7,6 +7,8 @@
   align-items: center;
   flex-direction: column;
   padding: 10px;
+  margin: 20px 0px;
+  animation: searchInit 400ms forwards;
 }
 
 .search-result-title {
@@ -49,9 +51,16 @@
   transition: all 250ms ease;
   border-radius: 4px;
   cursor: pointer;
+  height: 22px;
+  width: 22px;
 
   &:hover {
     background-color: var(--secondary-theme);
+  }
+
+  svg {
+    transition: all 450ms ease;
+    transform: rotate(0deg);
   }
 }
 
@@ -61,4 +70,22 @@
   padding: 4px;
   border-radius: 4px;
   margin-top: 4px;
+  line-height: 1.7;
+}
+
+.search-result-part-collapsed {
+  display: none;
+}
+
+.search-result-wordform {
+  margin: 10px;
+  padding: 3px;
+}
+
+.search-result-wordform ul {
+  margin: 10px;
+}
+
+.search-result-wordform li {
+  margin-left: 20px;
 }

@@ -4,7 +4,7 @@ import { AntonymAndSynonymsReturn } from "../constants";
 
 const getAntonymAndSynonyms = async (
   word: string
-): Promise<AntonymAndSynonymsReturn[]> => {
+): Promise<AntonymAndSynonymsReturn> => {
   const synonyms: string[] = [];
   const antonyms: string[] = [];
   const url = `https://www.thesaurus.com/browse/${word}`;

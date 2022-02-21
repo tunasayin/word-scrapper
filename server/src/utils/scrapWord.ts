@@ -4,7 +4,7 @@ import getAntonymAndSynonyms from "./getAntonymAndSynonyms";
 import getWordForms from "./getWordForms";
 
 const scrapWord = async (word: string): Promise<any> => {
-  const definitons = await getDefinitions(word);
+  const definitions = await getDefinitions(word);
 
   const trDefinitions = await getTurkishDefinitions(word);
 
@@ -13,9 +13,10 @@ const scrapWord = async (word: string): Promise<any> => {
   const wordForms = await getWordForms(word);
 
   return {
-    definitons: definitons,
+    definitions: definitions,
     trDefinitions: trDefinitions,
-    antonymAndSynonyms: antsAndSyns,
+    antonyms: antsAndSyns.antonyms,
+    synonyms: antsAndSyns.synonyms,
     wordForms: wordForms,
   };
 };

@@ -9,16 +9,19 @@ interface WordForm {
 }
 
 interface SearchResultArgs {
+  word: string;
   definitions: string[];
   trDefinitions: string[];
-  antonymSynonyms: AntonymAndSynonymsReturn[];
+  antonyms: string[];
+  synonyms: string[];
   wordForms: WordForm[];
 }
 
 interface WordData {
   definitions: string[];
   trDefinitions: string[];
-  antonymAndSynonyms: AntonymAndSynonymsReturn[];
+  antonyms: string[];
+  synonyms: string[];
   wordForms: WordForm[];
 }
 

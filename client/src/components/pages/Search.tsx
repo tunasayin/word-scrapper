@@ -4,6 +4,7 @@ import getWord from "../../utils/getWord";
 
 import SearchInput from "../layout/SearchInput";
 import SearchResult from "../layout/SearchResult";
+import Loader from "../layout/Loader";
 
 import "../../styles/search.scss";
 import { WordData } from "../../constants";
@@ -35,12 +36,18 @@ const Search: FC = (): ReactElement => {
         </div>
       </div>
       <div className="search-body">
-        <SearchResult
-          definitions={(result as any)?.definitions}
-          trDefinitions={(result as any)?.trDefinitions}
-          antonymSynonyms={(result as any)?.antonymSynonyms}
-          wordForms={(result as any)?.wordForms}
-        />
+        {result ? (
+          <SearchResult
+            word={word as string}
+            definitions={(result as any)?.definitions}
+            trDefinitions={(result as any)?.trDefinitions}
+            antonyms={(result as any)?.antonyms}
+            synonyms={(result as any)?.synonyms}
+            wordForms={(result as any)?.wordForms}
+          />
+        ) : (
+          <Loader />
+        )}
       </div>
     </div>
   );
