@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600;700;800;900&display=swap");
+
+@keyframes pgLoadEffect {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+:root {
+  --primary-theme: #196591;
+  --secondary-theme: #144c6d;
+  --primary-bg: #161616;
+  --secondary-bg: #202020;
+  --third-bg: #111111;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: var(--primary-bg);
+  color: white;
+  font-family: "Rubik", sans-serif;
+  transition: background 100ms ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+a {
+  margin: 0px;
+  padding: 0px;
+}
+
+a {
+  color: var(--primary-theme);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+input {
+  background-color: var(--secondary-bg);
+  color: #b9b8b8;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 7px;
+  border: 1px solid transparent;
+  transition: all 450ms ease;
+  font-size: 16px;
+  outline: none;
+
+  &:hover {
+    border-color: var(--primary-theme);
+  }
+
+  &:focus {
+    border-color: var(--seconday-theme);
+  }
+}
+
+#ws-container > div > * {
+  animation: pgLoadEffect 500ms forwards;
+}

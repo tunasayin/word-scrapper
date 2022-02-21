@@ -1,0 +1,16 @@
+.pgnotfound-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.pgnotfound-container h1 {
+  font-size: 60px;
+}
+
+.pgnotfound-container p {
+  font-size: 17px;
+}

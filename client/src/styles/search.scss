@@ -1,0 +1,53 @@
+@keyframes searchInit {
+  0% {
+    position: relative;
+    bottom: 43.5vh;
+  }
+  100% {
+    position: relative;
+    bottom: 30px;
+  }
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: all 450ms ease;
+}
+
+.search-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  transition: all 450ms ease;
+  max-width: 800px;
+  margin: 10px;
+}
+
+.search-head h1,
+.search-head p {
+  margin: 10px;
+}
+
+.search-head-input {
+  width: 90%;
+  margin: 25px 0px;
+}
+
+.search-body {
+  width: 90%;
+  max-width: 760px;
+}
+
+@media only screen and (max-width: 440px) {
+  .search-body {
+    width: 100%;
+  }
+
+  .search-body > div {
+    background-color: var(--primary-bg);
+  }
+}
