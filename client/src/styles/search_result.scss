@@ -1,3 +1,13 @@
+@keyframes wordFormsInit {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 .search-result-container {
   width: 100%;
   box-sizing: border-box;
@@ -67,25 +77,43 @@
 .search-result-part-desc {
   padding: 5px;
   width: 100%;
-  padding: 4px;
   border-radius: 4px;
   margin-top: 4px;
   line-height: 1.7;
+  box-sizing: border-box;
 }
 
-.search-result-part-collapsed {
+.search-result-collapsed {
   display: none;
 }
 
 .search-result-wordform {
   margin: 10px;
-  padding: 3px;
+
+  h3 {
+    cursor: pointer;
+    width: 100%;
+    background-color: var(--primary-bg);
+    padding: 5px;
+    color: white;
+    transition: all 450ms ease;
+    border-radius: 6px;
+
+    &:hover {
+      color: #dddbdb;
+    }
+  }
+
+  ul {
+    animation: wordFormsInit 400ms forwards;
+  }
 }
 
 .search-result-wordform ul {
-  margin: 10px;
+  margin-left: 30px;
+  margin-top: 10px;
 }
 
 .search-result-wordform li {
-  margin-left: 20px;
+  list-style: decimal;
 }

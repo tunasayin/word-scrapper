@@ -1,13 +1,40 @@
-import { FC, Fragment, ReactElement, useEffect } from "react";
+import { FC, ReactElement, useEffect } from "react";
 import { IoIosArrowForward } from "react-icons/io";
-import { SearchResultArgs } from "../../constants";
+import { SearchResultArgs, WordForm } from "../../constants";
 import $ from "jquery";
 
 import "../../styles/search_result.scss";
 
+const WordFormation: FC<WordForm> = ({
+  type,
+  words,
+}: WordForm): ReactElement => {
+  useEffect(() => {
+    $(".search-result-wordform h3").on("click", function () {
+      if ($(this).siblings().hasClass("search-result-collapsed")) {
+        $(this).siblings().removeClass("search-result-collapsed");
+      } else {
+        $(this).siblings().addClass("search-result-collapsed");
+      }
+    });
+  }, []);
+
+  return (
+    <div className="search-result-wordform">
+      <h3>{type}</h3>
+      <ul className="search-result-collapsed">
+        {words.map((word) => {
+          return <li>{word}</li>;
+        })}
+      </ul>
+    </div>
+  );
+};
+
 const SearchResult: FC<SearchResultArgs> = ({
   word,
   definitions,
+  exampleSentences,
   trDefinitions,
   antonyms,
   synonyms,
@@ -15,13 +42,19 @@ const SearchResult: FC<SearchResultArgs> = ({
 }: SearchResultArgs): ReactElement => {
   useEffect(
     () => {
-      $(".search-result-part-title").on("click", function () {
-        if ($(this).siblings().hasClass("search-result-part-collapsed")) {
-          $(this).siblings().removeClass("search-result-part-collapsed");
-          $(this).find(".search-result-part-toggle svg").css("rotate", "0deg");
+      $(".search-result-part-toggle").on("click", function () {
+        if ($(this).parent().siblings().hasClass("search-result-collapsed")) {
+          $(this).parent().siblings().removeClass("search-result-collapsed");
+          $(this)
+            .parent()
+            .find(".search-result-part-toggle svg")
+            .css("rotate", "0deg");
         } else {
-          $(this).siblings().addClass("search-result-part-collapsed");
-          $(this).find(".search-result-part-toggle svg").css("rotate", "90deg");
+          $(this).parent().siblings().addClass("search-result-collapsed");
+          $(this)
+            .parent()
+            .find(".search-result-part-toggle svg")
+            .css("rotate", "90deg");
         }
       });
     },
@@ -31,6 +64,7 @@ const SearchResult: FC<SearchResultArgs> = ({
 
   // Count varaibles
   let defCount = 0;
+  let exSentenceCount = 0;
 
   return (
     <div className="search-result-container">
@@ -44,16 +78,18 @@ const SearchResult: FC<SearchResultArgs> = ({
             </div>
           </div>
           <div className="search-result-part-desc">
-            {definitions?.map((definition) => {
-              defCount++;
-              return (
-                <p>
-                  <span style={{ fontWeight: "bold" }}>{defCount}</span>
-                  &nbsp; - &nbsp;
-                  {definition}
-                </p>
-              );
-            })}
+            {definitions.length > 0
+              ? definitions?.map((definition) => {
+                  defCount++;
+                  return (
+                    <p>
+                      <span style={{ fontWeight: "bold" }}>{defCount}</span>
+                      &nbsp; - &nbsp;
+                      {definition}
+                    </p>
+                  );
+                })
+              : "None"}
           </div>
         </div>
 
@@ -65,7 +101,7 @@ const SearchResult: FC<SearchResultArgs> = ({
             </div>
           </div>
           <div className="search-result-part-desc">
-            {trDefinitions?.join(", ")}
+            {trDefinitions.length > 0 ? trDefinitions?.join(", ") : "None"}
           </div>
         </div>
 
@@ -76,7 +112,9 @@ const SearchResult: FC<SearchResultArgs> = ({
               <IoIosArrowForward />
             </div>
           </div>
-          <div className="search-result-part-desc">{antonyms?.join(", ")}</div>
+          <div className="search-result-part-desc">
+            {antonyms.length > 0 ? antonyms?.join(", ") : "None"}
+          </div>
         </div>
 
         <div className="search-result-part">
@@ -86,7 +124,9 @@ const SearchResult: FC<SearchResultArgs> = ({
               <IoIosArrowForward />
             </div>
           </div>
-          <div className="search-result-part-desc">{synonyms?.join(", ")}</div>
+          <div className="search-result-part-desc">
+            {synonyms.length > 0 ? synonyms?.join(", ") : "None"}
+          </div>
         </div>
 
         <div className="search-result-part">
@@ -97,20 +137,41 @@ const SearchResult: FC<SearchResultArgs> = ({
             </div>
           </div>
           <div className="search-result-part-desc">
-            {wordForms?.map((wordForm) => {
-              return (
-                <Fragment>
-                  <div className="search-result-wordform">
-                    <h3>{wordForm.type}</h3>
-                    <ul>
-                      {wordForm.words.map((word) => {
-                        return <li>{word}</li>;
-                      })}
-                    </ul>
-                  </div>
-                </Fragment>
-              );
-            })}
+            {wordForms.length > 0
+              ? wordForms?.map((wordForm) => {
+                  return (
+                    <WordFormation
+                      type={wordForm.type}
+                      words={wordForm.words}
+                    />
+                  );
+                })
+              : "None"}
+          </div>
+        </div>
+
+        <div className="search-result-part">
+          <div className="search-result-part-title">
+            Example Sentences
+            <div className="search-result-part-toggle">
+              <IoIosArrowForward />
+            </div>
+          </div>
+          <div className="search-result-part-desc">
+            {exampleSentences.length > 0
+              ? exampleSentences?.map((exSentence) => {
+                  exSentenceCount++;
+                  return (
+                    <p>
+                      <span style={{ fontWeight: "bold" }}>
+                        {exSentenceCount}
+                      </span>
+                      &nbsp; - &nbsp;
+                      {exSentence}
+                    </p>
+                  );
+                })
+              : "None"}
           </div>
         </div>
       </div>

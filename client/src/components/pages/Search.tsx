@@ -1,5 +1,5 @@
 import { FC, ReactElement, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import getWord from "../../utils/getWord";
 
 import SearchInput from "../layout/SearchInput";
@@ -28,7 +28,7 @@ const Search: FC = (): ReactElement => {
     <div className="search-container">
       <div className="search-head">
         <div className="search-head-brand">
-          <h1>Word Scrapper</h1>
+          <Link to="/">Word Scrapper</Link>
           <p>Simple online scrapper to make your life easier</p>
         </div>
         <div className="search-head-input">
@@ -40,6 +40,7 @@ const Search: FC = (): ReactElement => {
           <SearchResult
             word={word as string}
             definitions={(result as any)?.definitions}
+            exampleSentences={(result as any)?.exampleSentences}
             trDefinitions={(result as any)?.trDefinitions}
             antonyms={(result as any)?.antonyms}
             synonyms={(result as any)?.synonyms}

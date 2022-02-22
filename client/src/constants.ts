@@ -11,6 +11,7 @@ interface WordForm {
 interface SearchResultArgs {
   word: string;
   definitions: string[];
+  exampleSentences: string[];
   trDefinitions: string[];
   antonyms: string[];
   synonyms: string[];

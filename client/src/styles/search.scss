@@ -24,7 +24,7 @@
   flex-direction: column;
   transition: all 450ms ease;
   max-width: 800px;
-  margin: 10px;
+  margin: 40px;
   animation: searchInit 400ms forwards;
 }
 
@@ -33,6 +33,20 @@
 
   p {
     display: none;
+  }
+}
+
+.search-head-brand a {
+  font-size: 30px;
+  color: white;
+  transition: all 450ms ease;
+  margin: 10px;
+  margin-top: 20px;
+  font-weight: bold;
+  text-decoration: none !important;
+
+  &:hover {
+    color: #cac9c9;
   }
 }
 

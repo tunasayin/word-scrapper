@@ -2,7 +2,7 @@ import express from "express";
 
 // Functions
 import scrapWord from "../utils/scrapWord";
-import getDefinitions from "../utils/getDefinitions";
+import getDefinitonAndExamples from "../utils/getDefinitonAndExamples";
 import getTurkishDefinitions from "../utils/getTurkishDefinitions";
 import getWordForms from "../utils/getWordForms";
 
@@ -22,10 +22,23 @@ router.get("/words/:word", async (req, res) => {
 });
 
 router.get("/definitions/:word", async (req, res) => {
-  const wordDefinitions = await getDefinitions(req.params.word);
+  const [wordDefinitions] = await getDefinitonAndExamples(req.params.word);
 
   if (wordDefinitions) {
     res.status(200).json({ success: true, data: wordDefinitions }).end();
+  } else {
+    return res
+      .status(500)
+      .json({ success: false, message: "Server Error" })
+      .end();
+  }
+});
+
+router.get("/examples/:word", async (req, res) => {
+  const [_, examples] = await getDefinitonAndExamples(req.params.word);
+
+  if (examples) {
+    res.status(200).json({ success: true, data: examples }).end();
   } else {
     return res
       .status(500)

@@ -1,7 +1,9 @@
 import cheerio from "cheerio";
 import fetch from "cross-fetch";
 
-const getDefinitions = async (word: string): Promise<string[]> => {
+const getDefinitonAndExamples = async (
+  word: string
+): Promise<[string[], string[]]> => {
   const defs: string[] = [];
   const exSentences: string[] = [];
   const url: string = `https://dictionary.cambridge.org/dictionary/english/${word}`;
@@ -28,7 +30,7 @@ const getDefinitions = async (word: string): Promise<string[]> => {
     })
     .catch((Err) => {});
 
-  return defs;
+  return [defs, exSentences];
 };
 
-export default getDefinitions;
+export default getDefinitonAndExamples;
