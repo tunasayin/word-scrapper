@@ -1,7 +1,11 @@
 import express from "express";
+import dotenv from "dotenv";
 import path from "path";
 
 import apiRoute from "./routes/api";
+
+// Initialize dotenv
+dotenv.config();
 
 // Express app instance
 const app = express();
@@ -20,4 +24,6 @@ app.get("/*", (req: express.Request, res: express.Response) => {
   res.sendFile(path.join(buildFolder, "index.html"));
 });
 
-app.listen(3000);
+app.listen(process.env.PORT, () => {
+  console.log(`Server started at port ${process.env.PORT}.`);
+});
