@@ -26,10 +26,12 @@
     "@types/react-dom": "^17.0.11"
   },
   "scripts": {
-    "start": "echo Building client... && react-app-rewired build && echo Client build process has been finished! && cd server && echo Building server.. && tsc && echo Server build process has been finished && echo Starting server.. && node dist/index.js",
+    "start": "npm run server-start",
+    "build": "npm run client-build && npm run server-build",
     "client-start": "react-app-rewired start",
     "client-build": "react-app-rewired build",
-    "server-start": "cd server && tsc && node dist/index.js"
+    "server-start": "node server/dist/index.js",
+    "server-build": "cd server && tsc"
   },
   "eslintConfig": {
     "extends": [
