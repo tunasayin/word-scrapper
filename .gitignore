@@ -1,7 +1,3 @@
-# Client
-client/node_modules
-cient/build
-
-# Server
-server/node_modules
+node_modules
+client/build
 server/dist

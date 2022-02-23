@@ -5,7 +5,9 @@ import path from "path";
 import apiRoute from "./routes/api";
 
 // Initialize dotenv
-dotenv.config();
+dotenv.config({
+  path: path.resolve(__dirname, "../../.env"),
+});
 
 // Express app instance
 const app = express();

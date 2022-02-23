@@ -30,10 +30,16 @@ Install dependencies
 npm install
 ```
 
+Build client
+
+```
+npm run client-build
+```
+
 Start server
 
 ```
-npm run start
+npm run server-start
 ```
 
 ## Contributing
