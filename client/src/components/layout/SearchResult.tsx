@@ -10,19 +10,21 @@ const WordFormation: FC<WordForm> = ({
   words,
 }: WordForm): ReactElement => {
   useEffect(() => {
-    $(".search-result-wordform h3").on("click", function () {
-      if ($(this).siblings().hasClass("search-result-collapsed")) {
-        $(this).siblings().removeClass("search-result-collapsed");
-      } else {
-        $(this).siblings().addClass("search-result-collapsed");
-      }
-    });
-  }, []);
+    $(".search-result-wordform h3")
+      .off("click")
+      .on("click", function () {
+        if ($(this).siblings().hasClass("search-result-collapsed")) {
+          $(this).siblings().removeClass("search-result-collapsed");
+        } else {
+          $(this).siblings().addClass("search-result-collapsed");
+        }
+      });
+  });
 
   return (
     <div className="search-result-wordform">
       <h3>{type}</h3>
-      <ul className="search-result-collapsed">
+      <ul className="">
         {words.map((word) => {
           return <li>{word}</li>;
         })}
