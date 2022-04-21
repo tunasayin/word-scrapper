@@ -6,7 +6,7 @@ Word Scrapper, is a basic tool for gathering grammatical information about a wor
 
 ## Preview
 
-![Preview](https://i.imgur.com/Iqycol6.gif)
+![Preview](https://i.imgur.com/UZ3kGz4.png)
 
 <br>
 
