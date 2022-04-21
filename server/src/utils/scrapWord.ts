@@ -12,6 +12,16 @@ const scrapWord = async (word: string): Promise<any> => {
 
   const wordForms = await getWordForms(word);
 
+  if (
+    !definitions?.length &&
+    !examples?.length &&
+    !trDefinitions?.length &&
+    !antsAndSyns.antonyms?.length &&
+    !antsAndSyns.synonyms?.length &&
+    !wordForms?.length
+  )
+    return null;
+
   return {
     definitions: definitions,
     exampleSentences: examples,

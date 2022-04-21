@@ -1,4 +1,4 @@
-import { FC, ReactElement, useEffect } from "react";
+import { FC, ReactElement } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { SearchResultArgs, WordForm } from "../../constants";
 import $ from "jquery";
@@ -9,21 +9,18 @@ const WordFormation: FC<WordForm> = ({
   type,
   words,
 }: WordForm): ReactElement => {
-  useEffect(() => {
-    $(".search-result-wordform h3")
-      .off("click")
-      .on("click", function () {
-        if ($(this).siblings().hasClass("search-result-collapsed")) {
-          $(this).siblings().removeClass("search-result-collapsed");
-        } else {
-          $(this).siblings().addClass("search-result-collapsed");
-        }
-      });
-  });
+  const toggleWordForm = (e: any) => {
+    const wordForm = $(e.currentTarget);
+    if (wordForm.siblings().hasClass("search-result-collapsed")) {
+      wordForm.siblings().removeClass("search-result-collapsed");
+    } else {
+      wordForm.siblings().addClass("search-result-collapsed");
+    }
+  };
 
   return (
     <div className="search-result-wordform">
-      <h3>{type}</h3>
+      <h3 onClick={toggleWordForm}>{type}</h3>
       <ul className="">
         {words.map((word) => {
           return <li>{word}</li>;
@@ -42,27 +39,22 @@ const SearchResult: FC<SearchResultArgs> = ({
   synonyms,
   wordForms,
 }: SearchResultArgs): ReactElement => {
-  useEffect(
-    () => {
-      $(".search-result-part-toggle").on("click", function () {
-        if ($(this).parent().siblings().hasClass("search-result-collapsed")) {
-          $(this).parent().siblings().removeClass("search-result-collapsed");
-          $(this)
-            .parent()
-            .find(".search-result-part-toggle svg")
-            .css("rotate", "0deg");
-        } else {
-          $(this).parent().siblings().addClass("search-result-collapsed");
-          $(this)
-            .parent()
-            .find(".search-result-part-toggle svg")
-            .css("rotate", "90deg");
-        }
-      });
-    },
-    //eslint-disable-next-line
-    []
-  );
+  const toggleResult = (e: any) => {
+    const searchResult = $(e.currentTarget);
+    if (searchResult.parent().siblings().hasClass("search-result-collapsed")) {
+      searchResult.parent().siblings().removeClass("search-result-collapsed");
+      searchResult
+        .parent()
+        .find(".search-result-part-toggle svg")
+        .css("rotate", "0deg");
+    } else {
+      searchResult.parent().siblings().addClass("search-result-collapsed");
+      searchResult
+        .parent()
+        .find(".search-result-part-toggle svg")
+        .css("rotate", "90deg");
+    }
+  };
 
   // Count varaibles
   let defCount = 0;
@@ -75,7 +67,7 @@ const SearchResult: FC<SearchResultArgs> = ({
         <div className="search-result-part">
           <div className="search-result-part-title">
             Definitions
-            <div className="search-result-part-toggle">
+            <div onClick={toggleResult} className="search-result-part-toggle">
               <IoIosArrowForward />
             </div>
           </div>
@@ -98,7 +90,7 @@ const SearchResult: FC<SearchResultArgs> = ({
         <div className="search-result-part">
           <div className="search-result-part-title">
             Turkish Definitions
-            <div className="search-result-part-toggle">
+            <div onClick={toggleResult} className="search-result-part-toggle">
               <IoIosArrowForward />
             </div>
           </div>
@@ -110,7 +102,7 @@ const SearchResult: FC<SearchResultArgs> = ({
         <div className="search-result-part">
           <div className="search-result-part-title">
             Antonyms
-            <div className="search-result-part-toggle">
+            <div onClick={toggleResult} className="search-result-part-toggle">
               <IoIosArrowForward />
             </div>
           </div>
@@ -122,7 +114,7 @@ const SearchResult: FC<SearchResultArgs> = ({
         <div className="search-result-part">
           <div className="search-result-part-title">
             Synonyms
-            <div className="search-result-part-toggle">
+            <div onClick={toggleResult} className="search-result-part-toggle">
               <IoIosArrowForward />
             </div>
           </div>
@@ -134,7 +126,7 @@ const SearchResult: FC<SearchResultArgs> = ({
         <div className="search-result-part">
           <div className="search-result-part-title">
             Word Forms
-            <div className="search-result-part-toggle">
+            <div onClick={toggleResult} className="search-result-part-toggle">
               <IoIosArrowForward />
             </div>
           </div>
@@ -155,7 +147,7 @@ const SearchResult: FC<SearchResultArgs> = ({
         <div className="search-result-part">
           <div className="search-result-part-title">
             Example Sentences
-            <div className="search-result-part-toggle">
+            <div onClick={toggleResult} className="search-result-part-toggle">
               <IoIosArrowForward />
             </div>
           </div>

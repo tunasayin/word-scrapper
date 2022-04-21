@@ -98,8 +98,11 @@
     color: white;
     transition: all 450ms ease;
     border-radius: 6px;
+    border: 1px solid transparent;
+    user-select: none;
 
     &:hover {
+      border-color: var(--primary-theme);
       color: #dddbdb;
     }
   }
